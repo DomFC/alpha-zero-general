@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 DL_ENV=${1:"pytorch"}
 NOTEBOOK_PORT=${2:-8888}
 VISDOM_PORT=${3:-8097}
@@ -8,8 +9,8 @@ if [ ${DL_ENV}=="pytorch" ]; then
            docker build . -t ${PYTORCH_IMAGE} -f ./docker/Dockerfile.pytorch
     fi
     # this should run a pytorch notebook container
-    docker run --runtime=nvidia --shm-size 8G -v `pwd`:/workspace -p ${NOTEBOOK_PORT}:8888 -p ${VISDOM_PORT}:8097 --name pytorch_notebook ${PYTORCH_IMAGE}
-    docker exec pytorch_notebook jupyter notebook list
+    docker run --runtime=nvidia --shm-size 8G -v `pwd`:/workspace -p ${NOTEBOOK_PORT}:8888 -p ${VISDOM_PORT}:8097 --name escong/pytorch-notebook ${PYTORCH_IMAGE}
+    docker run escong/pytorch-notebook jupyter notebook list
 else
     exit 1
 fi

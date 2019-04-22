@@ -1,15 +1,19 @@
 from Coach import Coach
-from othello.OthelloGame import OthelloGame as Game
-from othello.pytorch.NNet import NNetWrapper as nn
+from Plots import Plots
+from checkers.CheckersGame import CheckersGame as Game
+#from othello.OthelloGame import OthelloGame as Game
+#from othello.pytorch.NNet import NNetWrapper as nn
+from checkers.pytorch.NNet import NNetWrapper as nn
+from checkers.pytorch.NNet import args as nnet_args
 from utils import *
 
 args = dotdict({
-    'numIters': 1000,
-    'numEps': 100,
+    'numIters': 0,
+    'numEps': 10,
     'tempThreshold': 15,
-    'updateThreshold': 0.6,
-    'maxlenOfQueue': 200000,
-    'numMCTSSims': 25,
+    'updateThreshold': 0.42,
+    'maxlenOfQueue': 20000,
+    'numMCTSSims': 3,
     'arenaCompare': 40,
     'cpuct': 1,
 
@@ -21,7 +25,7 @@ args = dotdict({
 })
 
 if __name__=="__main__":
-    g = Game(6)
+    g = Game()
     nnet = nn(g)
 
     if args.load_model:
@@ -32,3 +36,5 @@ if __name__=="__main__":
         print("Load trainExamples from file")
         c.loadTrainExamples()
     c.learn()
+    plots = Plots()
+    plots.show_experiment(c.pi_losses, c.v_losses, nnet_args, args)

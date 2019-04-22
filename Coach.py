@@ -21,6 +21,8 @@ class Coach():
         self.mcts = MCTS(self.game, self.nnet, self.args)
         self.trainExamplesHistory = []    # history of examples from args.numItersForTrainExamplesHistory latest iterations
         self.skipFirstSelfPlay = False # can be overriden in loadTrainExamples()
+        self.pi_losses = []
+        self.v_losses = []
 
     def executeEpisode(self):
         """
@@ -114,7 +116,9 @@ class Coach():
             self.pnet.load_checkpoint(folder=self.args.checkpoint, filename='temp.pth.tar')
             pmcts = MCTS(self.game, self.pnet, self.args)
             
-            self.nnet.train(trainExamples)
+            pi_loss, v_loss = self.nnet.train(trainExamples)
+            self.pi_losses.append(pi_loss)
+            self.v_losses.append(v_loss)
             nmcts = MCTS(self.game, self.nnet, self.args)
 
             print('PITTING AGAINST PREVIOUS VERSION')

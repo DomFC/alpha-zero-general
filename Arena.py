@@ -48,12 +48,21 @@ class Arena():
             valids = self.game.getValidMoves(self.game.getCanonicalForm(board, curPlayer),1)
 
             if valids[action]==0:
-                print(action)
+                print()
+                print('action', action)
+                print('board', board)
+                print('flip', board.flipped_board)
+                print('m_c', board.mid_capture)
+                print('can.board', self.game.getCanonicalForm(board, curPlayer))
+                print('can.flip', self.game.getCanonicalForm(board, curPlayer).flipped_board)
+                print('can.m_c', self.game.getCanonicalForm(board, curPlayer).mid_capture)
+                print('curPlayer', curPlayer)
+                print('valid_moves', valids)
                 assert valids[action] >0
             board, curPlayer = self.game.getNextState(board, curPlayer, action)
         if verbose:
             assert(self.display)
-            print("Game over: Turn ", str(it), "Result ", str(self.game.getGameEnded(board, 1)))
+            print("Game over: Turn ", str(it), "Result ", str(self.game.getGameEnded(board, curPlayer)))
             self.display(board)
         return self.game.getGameEnded(board, 1)
 
@@ -94,11 +103,11 @@ class Arena():
             bar.next()
 
         self.player1, self.player2 = self.player2, self.player1
-        
+
         for _ in range(num):
             gameResult = self.playGame(verbose=verbose)
             if gameResult==-1:
-                oneWon+=1                
+                oneWon+=1
             elif gameResult==1:
                 twoWon+=1
             else:
@@ -110,7 +119,7 @@ class Arena():
             bar.suffix  = '({eps}/{maxeps}) Eps Time: {et:.3f}s | Total: {total:} | ETA: {eta:}'.format(eps=eps+1, maxeps=num, et=eps_time.avg,
                                                                                                        total=bar.elapsed_td, eta=bar.eta_td)
             bar.next()
-            
+
         bar.finish()
 
         return oneWon, twoWon, draws

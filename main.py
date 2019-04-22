@@ -8,8 +8,8 @@ from checkers.pytorch.NNet import args as nnet_args
 from utils import *
 
 args = dotdict({
-    'numIters': 100,
-    'numEps': 10,
+    'numIters': 1000,
+    'numEps': 100,
     'tempThreshold': 15,
     'updateThreshold': 0.42,
     'maxlenOfQueue': 20000,

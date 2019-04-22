@@ -8,7 +8,7 @@ from checkers.pytorch.NNet import args as nnet_args
 from utils import *
 
 args = dotdict({
-    'numIters': 0,
+    'numIters': 100,
     'numEps': 10,
     'tempThreshold': 15,
     'updateThreshold': 0.42,

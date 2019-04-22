@@ -1,3 +1,17 @@
+# Alpha Zero General pour le jeu de Dames
+Ce "fork" de Alpha Zero General a été fait dans le contexte du projet final du cours INF8225. L'objectif est d'appliquer la méthode utilisée par AlphaGo sur le jeu de Dames. Les résultats de ce projet sont détaillés dans le rapport remis.
+
+Les scripts suivants sont utiles pour faire des expériences:
+* ```main.py```: Ce script lance l'entraînement d'un réseau. Les hyperparamètres peuvent être ajustés dans la variable ```args``` et le type de réseau (conv, res) peut être changé dans le répertoire ```checkers/pytorch/NNet.py```. Il est a noté que certaines combinaisons d'hyperparamètres peuvent ne pas fonctionner, par exemple si un modèle non-existant est donné comme base ou si la mémoire dédiée d'un GPU supportant CUDA est excédée.
+* ```checkers_random.py```: Ce script fait joueur un modèle contre un joueur aléatoire. Des paramètres comme le nombre de simulations MCTS, la verbosité et le nombre de parties doivent être ajsutés dans ce fichier.
+* ```checkers_human.py```: Ce script fait joueur un modèle contre un joueur humain  travers une interface console. Des paramètres comme le nombre de simulations MCTS, la verbosité et le nombre de parties doivent être ajustés dans ce fichier.
+
+Les réseaux préentrainés peuvent être récupérés dans ce dossier : https://drive.google.com/open?id=1LFseByaJBhiCbOOon3zpIijLNdvSgUGE
+
+Il est à noté que tenter de charger un réseau avec la mauvaise configuration ne fonctionnera pas. Il faut utiliser le bon réseau dans le fichier ```checkers/pytorch/NNet.py```.
+
+
+Le README original est inclu ci-dessous.
 # Alpha Zero General (any game, any framework!)
 
 A simplified, highly flexible, commented and (hopefully) easy to understand implementation of self-play based reinforcement learning based on the AlphaGo Zero paper (Silver et al). It is designed to be easy to adopt for any two-player turn-based adversarial game and any deep learning framework of your choice. A sample implementation has been provided for the game of Othello in PyTorch, Keras, TensorFlow and Chainer. An accompanying tutorial can be found [here](http://web.stanford.edu/~surag/posts/alphazero.html). We also have implementations for GoBang and TicTacToe.

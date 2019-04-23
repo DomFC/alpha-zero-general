@@ -19,8 +19,8 @@ hp = HumanPlayer(g).play
 
 # nnet player
 n1 = NNet(g)
-n1.load_checkpoint('./pretrained_models/checkers/domfc/','best.pth.tar')
-args1 = dotdict({'numMCTSSims': 3, 'cpuct':1.0})
+n1.load_checkpoint('./pretrained_models/','residual_20.pth.tar')
+args1 = dotdict({'numMCTSSims': 40, 'cpuct':0.0001})
 mcts1 = MCTS(g, n1, args1)
 n1p = lambda x: np.argmax(mcts1.getActionProb(x, temp=0))
 

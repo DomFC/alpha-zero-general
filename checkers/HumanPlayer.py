@@ -26,8 +26,8 @@ class HumanPlayer():
                     [coordinates_list[row_f], coordinates_list[col_f]]
                    ]
             print(play, 'input', move_ind)
-        play = int(input().strip().replace(' ', ''))
         while True:
+            play = int(input().strip().replace(' ', ''))
             if valids[play] == 1:
                 return play
             print('move is invalid')
